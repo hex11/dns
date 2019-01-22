@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>f20d9e39-cc91-4ff0-bfd0-a5b7b0fbc5c1</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>DNSShared</Import_RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)Client\ClientRequest.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Client\ClientResponse.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Client\DnsClient.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Client\RequestResolver\IRequestResolver.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Client\RequestResolver\NullRequestResolver.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Client\RequestResolver\TcpRequestResolver.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Client\RequestResolver\UdpRequestResolver.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Client\ResponseException.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Protocol\CharacterString.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Protocol\Domain.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Protocol\Header.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Protocol\IMessage.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Protocol\IMessageEntry.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Protocol\IRequest.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Protocol\IResponse.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Protocol\Marshalling\EndianAttribute.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Protocol\Marshalling\Endianness.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Protocol\Marshalling\Struct.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Protocol\OperationCode.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Protocol\Question.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Protocol\RecordClass.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Protocol\RecordType.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Protocol\Request.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Protocol\ResourceRecords\BaseResourceRecord.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Protocol\ResourceRecords\CanonicalNameResourceRecord.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Protocol\ResourceRecords\IPAddressResourceRecord.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Protocol\ResourceRecords\IResourceRecord.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Protocol\ResourceRecords\MailExchangeResourceRecord.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Protocol\ResourceRecords\NameServerResourceRecord.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Protocol\ResourceRecords\PointerResourceRecord.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Protocol\ResourceRecords\ResourceRecord.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Protocol\ResourceRecords\ResourceRecordFactory.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Protocol\ResourceRecords\StartOfAuthorityResourceRecord.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Protocol\ResourceRecords\TextResourceRecord.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Protocol\Response.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Protocol\ResponseCode.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Protocol\Utils\ByteExtensions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Protocol\Utils\ByteStream.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Protocol\Utils\ObjectStringifier.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Protocol\Utils\TaskExtensions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Server\DnsServer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Server\MasterFile.cs" />
+  </ItemGroup>
+</Project>
