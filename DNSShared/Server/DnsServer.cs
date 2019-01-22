@@ -105,7 +105,12 @@ namespace DNS.Server {
 
                 if (disposing) {
                     run = false;
-                    udp?.Dispose();
+                    //udp?.Dispose();
+                    // UdpClient.Dispose() is not available on .NET Framework 4.5, using Close() instead.
+                    try {
+                        udp?.Close();
+                    } catch (Exception) {
+                    }
                 }
             }
         }
