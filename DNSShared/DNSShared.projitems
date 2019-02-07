@@ -12,6 +12,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Client\ClientRequest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Client\ClientResponse.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Client\DnsClient.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Client\RequestResolver\HttpsRequestResolver.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Client\RequestResolver\IRequestResolver.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Client\RequestResolver\NullRequestResolver.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Client\RequestResolver\TcpRequestResolver.cs" />
