@@ -7,6 +7,7 @@ using DNS.Protocol.Utils;
 
 namespace DNS.Client.RequestResolver {
     public class UdpRequestResolver : IRequestResolver {
+        private int retries = 3;
         private int timeout;
         private IRequestResolver fallback;
         private IPEndPoint dns;
@@ -24,13 +25,23 @@ namespace DNS.Client.RequestResolver {
         }
 
         public async Task<IResponse> Resolve(IRequest request) {
-            using(UdpClient udp = new UdpClient()) {
+            int retry = retries;
+            IPEndPoint localEP = null;
+            RETRY:
+            using (UdpClient udp = (localEP == null ? new UdpClient() : new UdpClient(localEP))) {
                 await udp
                     .SendAsync(request.ToArray(), request.Size, dns)
                     .WithCancellationTimeout(timeout);
 
-                UdpReceiveResult result = await udp.ReceiveAsync().WithCancellationTimeout(timeout);
-                if(!result.RemoteEndPoint.Equals(dns)) throw new IOException("Remote endpoint mismatch");
+                localEP = (IPEndPoint)udp.Client.LocalEndPoint;
+
+                UdpReceiveResult result;
+                try {
+                    result = await udp.ReceiveAsync().WithCancellationTimeout(timeout);
+                    if (!result.RemoteEndPoint.Equals(dns)) throw new IOException("Remote endpoint mismatch");
+                } catch (System.Exception) when (--retry > 0) {
+                    goto RETRY;
+                }
                 byte[] buffer = result.Buffer;
                 Response response = Response.FromArray(buffer);
 
