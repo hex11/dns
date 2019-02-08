@@ -26,7 +26,13 @@ namespace DNS.Client.RequestResolver
             var req = new HttpRequestMessage(HttpMethod.Get, reqUri);
             req.Headers.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/dns-message"));
 
-            var resp = await httpClient.SendAsync(req, HttpCompletionOption.ResponseContentRead, new CancellationTokenSource(Timeout).Token);
+            HttpResponseMessage resp;
+            var ct = new CancellationTokenSource(Timeout).Token;
+            try {
+                resp = await httpClient.SendAsync(req, HttpCompletionOption.ResponseContentRead, ct);
+            } catch (Exception) when (ct.IsCancellationRequested) {
+                throw new TimeoutException();
+            }
 
             if (resp.Content.Headers.ContentType.MediaType != "application/dns-message") {
                 throw new Exception("wrong response type");

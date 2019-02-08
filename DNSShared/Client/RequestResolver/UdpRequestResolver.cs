@@ -41,6 +41,8 @@ namespace DNS.Client.RequestResolver {
                     if (!result.RemoteEndPoint.Equals(dns)) throw new IOException("Remote endpoint mismatch");
                 } catch (System.Exception) when (--retry > 0) {
                     goto RETRY;
+                } catch (System.OperationCanceledException) {
+                    throw new System.TimeoutException();
                 }
                 byte[] buffer = result.Buffer;
                 Response response = Response.FromArray(buffer);
