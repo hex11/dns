@@ -15,7 +15,11 @@ namespace DNS.Client.RequestResolver
         public string Uri { get; set; }
         public int Timeout { get; set; } = 10000;
 
-        private HttpClient httpClient = new HttpClient();
+        private HttpClient httpClient = new HttpClient(
+#if NETFX
+        new WebRequestHandler() { AllowPipelining = true }
+#endif
+            );
 
         public async Task<IResponse> Resolve(IRequest request)
         {
@@ -33,6 +37,8 @@ namespace DNS.Client.RequestResolver
             } catch (Exception) when (ct.IsCancellationRequested) {
                 throw new TimeoutException();
             }
+
+            resp.EnsureSuccessStatusCode();
 
             if (resp.Content.Headers.ContentType.MediaType != "application/dns-message") {
                 throw new Exception("wrong response type");
